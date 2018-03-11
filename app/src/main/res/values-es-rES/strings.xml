@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">LolBuilds</string>
+    <string name="action_settings">Ajustes</string>
+    <string name="title_activity_main">Inicio</string>
+    <string name="title_activity_ajustes">Ajustes</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="pref_header_acerca">Acerca de nosotros</string>
+    <string name="acerca_de_texto">Soy un estudiante de grado superior que esta estudiando desarrollo de aplicaciones moviles. Espero que te guste la aplicacion :D</string>
+    <string name="disclaimer">RENUNCIA\n\nLoLBuilds no está respaldado por Riot Games y no refleja los puntos de vista ni las opiniones de Riot Games of Riot Games ni de nadie oficialmente involucrado en la producción o administración de League of Legends. League of Legends y Riot Games son marcas comerciales de Riot Games, Inc. League of Legends © Riot Games, Inc.</string>
+    <string name="desarrollador">DESARROLLADOR: Raúl Saavedra\n\nTRADUCTOR: Raúl Saavedra</string>
+    <string name="app_version">1.0</string>
+    <string name="title_version">Version</string>
+    <string name="title_activity_bans">Bans</string>
+    <string name="title_activity_ayuda">Ayuda</string>
+    <string name="title_activity_contacto">Contacto</string>
+    <string name="idioma">Idioma</string>
+    <string name="resumen_idioma">Aquí se puede cambiar el idioma</string>
+    <string name="titulo_idioma">Idioma</string>
+    <string name="idioma_key">idioma_key</string>
+    <string name="contacto">Contacto</string>
+    <string name="nombre">Nombre</string>
+    <string name="correo">Correo</string>
+    <string name="asunto">Asunto</string>
+    <string name="mensaje">Mensaje</string>
+    <string name="enviar">Enviar</string>
+    <string name="builds_menu">Builds</string>
+    <string name="bans_menu">Bans</string>
+    <string name="ajustes_manu">Ajustes</string>
+    <string name="ayuda_menu">Ayuda</string>
+    <string name="contacto_menu">Contacto</string>
+    <string name="title_activity_champ">ChampActivity</string>
+    <string name="title_search">Busqueda</string>
+    <string name="title_activity_help">Ayuda</string>
+    <string name="pref_title_urls">Web oficiales</string>
+    <string name="title_riot_support">Soporte de Riot</string>
+    <string name="title_official_page">Web oficial</string>
+    <string name="name_key">tamaño_key</string>
+    <string name="name_title">Nombre</string>
+    <string name="title_favourites">Favoritos</string>
+    <string name="title_general">General</string>
+    <string name="text_first">1- En la opción numero uno, puede abrir el menú para acceder a algunas funcionalidades (Builds (Página por defecto), Bans, Ajustes, Ayuda, Contacto)\n\n
+2- En la opción numero dos, tiene la opción de buscar personajes por su nombre o por alguna letra que contenga su nombre\n\n
+3- En la opción numero tres, tiene la opción de filtrar los personajes por su rol\n\n
+4- En cada personaje se puede hacer tap para ver la información sobre la build, que subirse en cada nivel y las runas\n\n
+4.1 - Si mantiene pulsado un personaje, ese personaje se añadira a favoritos (se vera visualmente porque el personaje tendra un corazon en su imagen en la parte derecha inferior, y si el personaje ya esta en favoritos se borrará de favoritos\n\n</string>
+    <string name="bienvenida">Bienvenido a LolBuilds invocador</string>
+    <string name="continuar">Continuar</string>
+</resources>
