@@ -1,11 +1,6 @@
 package com.example.dam2a.loldatabase2;
 
-import android.content.ContentResolver;
-import android.content.Context;
-import android.content.res.Resources;
 import android.net.Uri;
-import android.support.annotation.AnyRes;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -16,7 +11,6 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -26,7 +20,10 @@ public class MainActivity extends AppCompatActivity {
 
     List<Champ> champs = new ArrayList<>();
     List<ChampBans> bans = new ArrayList<>();
-    List<Build> build = new ArrayList<>();
+    List<Build0> build0 = new ArrayList<>();
+    List<Build1> build1 = new ArrayList<>();
+    List<Build2> build2 = new ArrayList<>();
+    List<Build3> build3 = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,9 +37,11 @@ public class MainActivity extends AppCompatActivity {
         uploadChamps();
         uploadBansGeneral();
         uploadBansBronce();
+        uploadBuildAatrox();
     }
 
     void uploadChamps(){
+        champs.clear();
         champs.add(new Champ(0, getString(R.string.title_top), R.raw.ic_aatrox, getString(R.string.title_aatrox)));
         champs.add(new Champ(1, getString(R.string.title_mid), R.raw.ic_ahri, getString(R.string.title_ahri)));
         champs.add(new Champ(2, getString(R.string.title_mid), R.raw.ic_akali, getString(R.string.title_akali)));
@@ -86,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
 
         for (final Champ champ: champs) {
             
-            StorageReference champsRef = FirebaseStorage.getInstance().getReference().child("champs" + "/" + UUID.randomUUID().toString() + champ.name);
+            StorageReference champsRef = FirebaseStorage.getInstance().getReference().child("champs" + "/" + champ.name);
             UploadTask uploadTask = champsRef.putStream(getResources().openRawResource(champ.getImageId()));
 
             uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -179,8 +178,26 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    void uploadBuilds () {
+    void uploadBuildAatrox () {
+        build2.clear();
+        build2.add(new Build2(R.raw.ic_aatrox,"50,28 %","Top","2013",R.raw.ic_tabi_ninja,R.raw.ic_trinidad,R.raw.ic_sterak,R.raw.ic_hidra_titanica,R.raw.ic_rostro_espiritual,R.raw.ic_rey_arruinado,R.raw.ic_flash,R.raw.ic_teleport,R.raw.ic_espada_de_doran,R.raw.ic_pocion,R.raw.ic_aatrox_lvl,R.raw.ic_precision_round,R.raw.ic_domination,R.raw.ic_brujeria,R.raw.ic_valor,R.raw.ic_inspiracion,R.raw.ic_domination,R.raw.ic_brujeria,R.raw.ic_valor_round,R.raw.ic_inspiracion,R.raw.ic_garras_del_inmortal_round,R.raw.ic_inquebrantable,R.raw.ic_piel_de_hierro_round,R.raw.ic_sobrecrecimiento_round,R.raw.ic_reverberacion,R.raw.ic_demoler,R.raw.ic_concha_espejo,R.raw.ic_revitalizar,R.raw.ic_protector,R.raw.ic_fuente_de_vida_round,R.raw.ic_condicionamiento,R.raw.ic_fuentes_renovadas,R.raw.ic_super_curacion,R.raw.ic_leyenda_presteza_round,R.raw.ic_golpe_de_gracia,R.raw.ic_triumfo,R.raw.ic_leyenda_tenacidad,R.raw.ic_derribado,R.raw.ic_claridad_mental,R.raw.ic_leyenda_linaje,R.raw.ic_ultimo_esfuerzo_round));
 
+        for (final Build2 build2 : build2){
+
+            StorageReference champsRef = FirebaseStorage.getInstance().getReference().child("build" + "/" + "Aatrox");
+            UploadTask uploadTask = champsRef.putStream(getResources().openRawResource(build2.getImage1()));
+
+            uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    Uri downloadUrl = taskSnapshot.getDownloadUrl();
+                    BuildFB2 buildFB2 = new BuildFB2(downloadUrl.toString(),build2.porciento,build2.papel,build2.año,downloadUrl.toString(),downloadUrl.toString(),downloadUrl.toString(),downloadUrl.toString(),downloadUrl.toString(),downloadUrl.toString(),downloadUrl.toString(),downloadUrl.toString(),downloadUrl.toString(),downloadUrl.toString(),downloadUrl.toString(),downloadUrl.toString(),downloadUrl.toString(),downloadUrl.toString(),downloadUrl.toString(),downloadUrl.toString(),downloadUrl.toString(),downloadUrl.toString(),downloadUrl.toString(),downloadUrl.toString(),downloadUrl.toString(),downloadUrl.toString(),downloadUrl.toString(),downloadUrl.toString(),downloadUrl.toString(),downloadUrl.toString(),downloadUrl.toString(),downloadUrl.toString(),downloadUrl.toString(),downloadUrl.toString(),downloadUrl.toString(),downloadUrl.toString(),downloadUrl.toString(),downloadUrl.toString(),downloadUrl.toString(),downloadUrl.toString(),downloadUrl.toString(),downloadUrl.toString(),downloadUrl.toString(),downloadUrl.toString(),downloadUrl.toString());
+
+                    String champKey = ref.child("build").push().getKey();
+                    ref.child("build").child(champKey).setValue(buildFB2);
+                }
+            });
+        }
     }
 
     void uploadBansBronce () {

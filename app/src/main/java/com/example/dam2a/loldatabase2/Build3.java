@@ -4,7 +4,7 @@ package com.example.dam2a.loldatabase2;
  * Created by Raul on 11/03/2018.
  */
 
-public class Build {
+public class Build3 {
 
     int image1;
     String porciento;
@@ -54,9 +54,9 @@ public class Build {
     int image43;
     int image44;
 
-    public Build() {}
+    public Build3() {}
 
-    public Build(int image1, String porciento, String papel, String año, int image2, int image3, int image4, int image5, int image6, int image7, int image8, int image9, int image10, int image11, int image12, int image13, int image14, int image15, int image16, int image17, int image18, int image19, int image20, int image21, int image22, int image23, int image24, int image25, int image26, int image27, int image28, int image29, int image30, int image31, int image32, int image33, int image34, int image35, int image36, int image37, int image38, int image39, int image40, int image41, int image42, int image43, int image44) {
+    public Build3(int image1, String porciento, String papel, String año, int image2, int image3, int image4, int image5, int image6, int image7, int image8, int image9, int image10, int image11, int image12, int image13, int image14, int image15, int image16, int image17, int image18, int image19, int image20, int image21, int image22, int image23, int image24, int image25, int image26, int image27, int image28, int image29, int image30, int image31, int image32, int image33, int image34, int image35, int image36, int image37, int image38, int image39, int image40, int image41, int image42, int image43, int image44) {
         this.image1 = image1;
         this.porciento = porciento;
         this.papel = papel;
