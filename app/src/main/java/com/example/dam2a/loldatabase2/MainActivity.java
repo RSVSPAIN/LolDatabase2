@@ -20,10 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
     List<Champ> champs = new ArrayList<>();
     List<ChampBans> bans = new ArrayList<>();
-    List<Build0> build0 = new ArrayList<>();
-    List<Build1> build1 = new ArrayList<>();
-    List<Build2> build2 = new ArrayList<>();
-    List<Build3> build3 = new ArrayList<>();
+    List<Build> build = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         uploadChamps();
         uploadBansGeneral();
         uploadBansBronce();
-        uploadBuildAatrox();
+        //uploadBuilds();
     }
 
     void uploadChamps(){
@@ -118,6 +115,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void uploadBansGeneral() {
+        bans.clear();
         bans.add(new ChampBans(0, R.raw.ic_aatrox,"Aatrox","50,28%","0,17%","1,71%"));
         bans.add(new ChampBans(1, R.raw.ic_ahri,"Ahri","52,29%","0,21%","5,80%"));
         bans.add(new ChampBans(2, R.raw.ic_akali,"Akali","49,94%","0,50%","4,32%"));
@@ -161,7 +159,7 @@ public class MainActivity extends AppCompatActivity {
 
         for (final ChampBans bans: bans) {
 
-            StorageReference champsRef = FirebaseStorage.getInstance().getReference().child("bans" + "/" + UUID.randomUUID().toString() + bans.name);
+            StorageReference champsRef = FirebaseStorage.getInstance().getReference().child("bans" + "/" + bans.name);
             UploadTask uploadTask = champsRef.putStream(getResources().openRawResource(bans.getImageId()));
 
             uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -178,26 +176,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    void uploadBuildAatrox () {
-        build2.clear();
-        build2.add(new Build2(R.raw.ic_aatrox,"50,28 %","Top","2013",R.raw.ic_tabi_ninja,R.raw.ic_trinidad,R.raw.ic_sterak,R.raw.ic_hidra_titanica,R.raw.ic_rostro_espiritual,R.raw.ic_rey_arruinado,R.raw.ic_flash,R.raw.ic_teleport,R.raw.ic_espada_de_doran,R.raw.ic_pocion,R.raw.ic_aatrox_lvl,R.raw.ic_precision_round,R.raw.ic_domination,R.raw.ic_brujeria,R.raw.ic_valor,R.raw.ic_inspiracion,R.raw.ic_domination,R.raw.ic_brujeria,R.raw.ic_valor_round,R.raw.ic_inspiracion,R.raw.ic_garras_del_inmortal_round,R.raw.ic_inquebrantable,R.raw.ic_piel_de_hierro_round,R.raw.ic_sobrecrecimiento_round,R.raw.ic_reverberacion,R.raw.ic_demoler,R.raw.ic_concha_espejo,R.raw.ic_revitalizar,R.raw.ic_protector,R.raw.ic_fuente_de_vida_round,R.raw.ic_condicionamiento,R.raw.ic_fuentes_renovadas,R.raw.ic_super_curacion,R.raw.ic_leyenda_presteza_round,R.raw.ic_golpe_de_gracia,R.raw.ic_triumfo,R.raw.ic_leyenda_tenacidad,R.raw.ic_derribado,R.raw.ic_claridad_mental,R.raw.ic_leyenda_linaje,R.raw.ic_ultimo_esfuerzo_round));
-
-        for (final Build2 build2 : build2){
-
-            StorageReference champsRef = FirebaseStorage.getInstance().getReference().child("build" + "/" + "Aatrox");
-            UploadTask uploadTask = champsRef.putStream(getResources().openRawResource(build2.getImage1()));
-
-            uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    Uri downloadUrl = taskSnapshot.getDownloadUrl();
-                    BuildFB2 buildFB2 = new BuildFB2(downloadUrl.toString(),build2.porciento,build2.papel,build2.año,downloadUrl.toString(),downloadUrl.toString(),downloadUrl.toString(),downloadUrl.toString(),downloadUrl.toString(),downloadUrl.toString(),downloadUrl.toString(),downloadUrl.toString(),downloadUrl.toString(),downloadUrl.toString(),downloadUrl.toString(),downloadUrl.toString(),downloadUrl.toString(),downloadUrl.toString(),downloadUrl.toString(),downloadUrl.toString(),downloadUrl.toString(),downloadUrl.toString(),downloadUrl.toString(),downloadUrl.toString(),downloadUrl.toString(),downloadUrl.toString(),downloadUrl.toString(),downloadUrl.toString(),downloadUrl.toString(),downloadUrl.toString(),downloadUrl.toString(),downloadUrl.toString(),downloadUrl.toString(),downloadUrl.toString(),downloadUrl.toString(),downloadUrl.toString(),downloadUrl.toString(),downloadUrl.toString(),downloadUrl.toString(),downloadUrl.toString(),downloadUrl.toString(),downloadUrl.toString(),downloadUrl.toString(),downloadUrl.toString(),downloadUrl.toString());
-
-                    String champKey = ref.child("build").push().getKey();
-                    ref.child("build").child(champKey).setValue(buildFB2);
-                }
-            });
-        }
+    void uploadBuilds () {
     }
 
     void uploadBansBronce () {
@@ -210,7 +189,7 @@ public class MainActivity extends AppCompatActivity {
 
         for (final ChampBans bans : bans){
 
-            StorageReference champsRef = FirebaseStorage.getInstance().getReference().child("bans" + "/" + UUID.randomUUID().toString() + bans.name);
+            StorageReference champsRef = FirebaseStorage.getInstance().getReference().child("bans" + "/" + bans.name);
             UploadTask uploadTask = champsRef.putStream(getResources().openRawResource(bans.getImageId()));
 
             uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
