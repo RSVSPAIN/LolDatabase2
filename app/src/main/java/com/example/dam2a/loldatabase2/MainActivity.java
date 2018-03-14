@@ -24,7 +24,6 @@ public class MainActivity extends AppCompatActivity {
 
     List<Champ> champs = new ArrayList<>();
     List<ChampBans> bans = new ArrayList<>();
-    List<ChampBans> bans2 = new ArrayList<>();
     List<Build> build = new ArrayList<>();
 
     @Override
@@ -50,6 +49,10 @@ public class MainActivity extends AppCompatActivity {
         uploadChamps();
         uploadBansGeneral();
         uploadBansBronce();
+        uploadBansPlata();
+        uploadBansOro();
+        uploadBansPlatino();
+        uploadBansDiamante();
         //uploadBuilds();
     }
 
@@ -192,29 +195,128 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    void uploadBuilds () {
-    }
+    void uploadBansBronce() {
+        bans.clear();
+        bans.add(new ChampBans(12, R.raw.ic_brand,"Brand","55,34%","12,52%","11,82%"));
+        bans.add(new ChampBans(11, R.raw.ic_blitzcrank,"Blitzcrank","53,36%","32,60%","10,54%"));
+        bans.add(new ChampBans(38, R.raw.ic_illaoi,"Illaoi","54,47%","25,90%","08,79%"));
+        bans.add(new ChampBans(3, R.raw.ic_alistar,"Alistar","52,49%","08,57%","11,66%"));
 
-   void uploadBansBronce () {
+        for (final ChampBans bans : bans){
 
-        bans2.add(new ChampBans(12, R.raw.ic_brand,"Brand","55,34%","12,52%","11,82%"));
-        bans2.add(new ChampBans(11, R.raw.ic_blitzcrank,"Blitzcrank","53,36%","32,60%","10,54%"));
-        bans2.add(new ChampBans(38, R.raw.ic_illaoi,"Illaoi","54,47%","25,90%","08,79%"));
-        bans2.add(new ChampBans(3, R.raw.ic_alistar,"Alistar","52,49%","08,57%","11,66%"));
-
-        for (final ChampBans bans2 : bans2){
-
-            StorageReference champsRef = FirebaseStorage.getInstance().getReference().child("bans" + "/" + bans2.name + "bronce");
-            UploadTask uploadTask = champsRef.putStream(getResources().openRawResource(bans2.getImageId()));
+            StorageReference champsRef = FirebaseStorage.getInstance().getReference().child("bans" + "/" + bans.name + "bronce");
+            UploadTask uploadTask = champsRef.putStream(getResources().openRawResource(bans.getImageId()));
 
             uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     Uri downloadUrl = taskSnapshot.getDownloadUrl();
-                    ChampBansFB champBansFB2 = new ChampBansFB(bans2.id, downloadUrl.toString(), bans2.name, bans2.victorias, bans2.banrate, bans2.pickrate);
+                    ChampBansFB champBansFB2 = new ChampBansFB(bans.id, downloadUrl.toString(), bans.name, bans.victorias, bans.banrate, bans.pickrate);
 
                     String champKey = ref.child("bans").push().getKey();
                     ref.child("bans/bronce").child(champKey).setValue(champBansFB2);
+                }
+            });
+        }
+    }
+
+    void uploadBansPlata () {
+        bans.clear();
+        bans.add(new ChampBans(12, R.raw.ic_brand,"Brand","55,34%","12,52%","11,82%"));
+        bans.add(new ChampBans(11, R.raw.ic_blitzcrank,"Blitzcrank","53,36%","32,60%","10,54%"));
+        bans.add(new ChampBans(38, R.raw.ic_illaoi,"Illaoi","54,47%","25,90%","08,79%"));
+        bans.add(new ChampBans(3, R.raw.ic_alistar,"Alistar","52,49%","08,57%","11,66%"));
+
+        for (final ChampBans bans : bans){
+
+            StorageReference champsRef = FirebaseStorage.getInstance().getReference().child("bans" + "/" + bans.name + "plata");
+            UploadTask uploadTask = champsRef.putStream(getResources().openRawResource(bans.getImageId()));
+
+            uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    Uri downloadUrl = taskSnapshot.getDownloadUrl();
+                    ChampBansFB champBansFB2 = new ChampBansFB(bans.id, downloadUrl.toString(), bans.name, bans.victorias, bans.banrate, bans.pickrate);
+
+                    String champKey = ref.child("bans").push().getKey();
+                    ref.child("bans/plata").child(champKey).setValue(champBansFB2);
+                }
+            });
+        }
+    }
+
+    void uploadBansOro () {
+        bans.clear();
+        bans.add(new ChampBans(26, R.raw.ic_ezreal,"Ezreal","52,81%","25,25%","23,35%"));
+        bans.add(new ChampBans(12, R.raw.ic_brand,"Brand","54,95%","12,52%","11,82%"));
+        bans.add(new ChampBans(11, R.raw.ic_blitzcrank,"Blitzcrank","50,78%","32,60%","10,54%"));
+        bans.add(new ChampBans(3, R.raw.ic_alistar,"Alistar","53,89%","08,57%","11,66%"));
+
+        for (final ChampBans bans : bans){
+
+            StorageReference champsRef = FirebaseStorage.getInstance().getReference().child("bans" + "/" + bans.name + "oro");
+            UploadTask uploadTask = champsRef.putStream(getResources().openRawResource(bans.getImageId()));
+
+            uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    Uri downloadUrl = taskSnapshot.getDownloadUrl();
+                    ChampBansFB champBansFB2 = new ChampBansFB(bans.id, downloadUrl.toString(), bans.name, bans.victorias, bans.banrate, bans.pickrate);
+
+                    String champKey = ref.child("bans").push().getKey();
+                    ref.child("bans/oro").child(champKey).setValue(champBansFB2);
+                }
+            });
+        }
+    }
+
+    void uploadBansPlatino () {
+        bans.clear();
+        bans.add(new ChampBans(26, R.raw.ic_ezreal,"Ezreal","52,85%","25,25%","23,35%"));
+        bans.add(new ChampBans(25, R.raw.ic_evelynn,"Evelynn","54,31%","36,30%","08,16%"));
+        bans.add(new ChampBans(3, R.raw.ic_gangplank,"Gangplank","53,97%","05,76%","10,49%"));
+        bans.add(new ChampBans(3, R.raw.ic_alistar,"Alistar","52,71%","08,57%","11,66%"));
+
+
+        for (final ChampBans bans : bans){
+
+            StorageReference champsRef = FirebaseStorage.getInstance().getReference().child("bans" + "/" + bans.name + "platino");
+            UploadTask uploadTask = champsRef.putStream(getResources().openRawResource(bans.getImageId()));
+
+            uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    Uri downloadUrl = taskSnapshot.getDownloadUrl();
+                    ChampBansFB champBansFB2 = new ChampBansFB(bans.id, downloadUrl.toString(), bans.name, bans.victorias, bans.banrate, bans.pickrate);
+
+                    String champKey = ref.child("bans").push().getKey();
+                    ref.child("bans/platino").child(champKey).setValue(champBansFB2);
+                }
+            });
+        }
+    }
+
+    void uploadBansDiamante() {
+        bans.clear();
+        bans.add(new ChampBans(26, R.raw.ic_ezreal,"Ezreal","58,76%","25,25%","23,35%"));
+        bans.add(new ChampBans(3, R.raw.ic_gangplank,"Gangplank","65,92%","05,76%","10,49%"));
+        bans.add(new ChampBans(12, R.raw.ic_brand,"Brand","57,96%","12,52%","11,82%"));
+        bans.add(new ChampBans(29, R.raw.ic_evelynn,"Fizz","61,69%","12,59%","07,80%"));
+
+
+        for (final ChampBans bans : bans){
+
+            StorageReference champsRef = FirebaseStorage.getInstance().getReference().child("bans" + "/" + bans.name + "diamante");
+            UploadTask uploadTask = champsRef.putStream(getResources().openRawResource(bans.getImageId()));
+
+            uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    Uri downloadUrl = taskSnapshot.getDownloadUrl();
+                    ChampBansFB champBansFB2 = new ChampBansFB(bans.id, downloadUrl.toString(), bans.name, bans.victorias, bans.banrate, bans.pickrate);
+
+                    String champKey = ref.child("bans").push().getKey();
+                    ref.child("bans/diamante").child(champKey).setValue(champBansFB2);
                 }
             });
         }
