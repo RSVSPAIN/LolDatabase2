@@ -1,10 +1,14 @@
 package com.example.dam2a.loldatabase2;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -20,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
     List<Champ> champs = new ArrayList<>();
     List<ChampBans> bans = new ArrayList<>();
+    List<ChampBans> bans2 = new ArrayList<>();
     List<Build> build = new ArrayList<>();
 
     @Override
@@ -28,6 +33,17 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //coje la raiz
+
+        Button button = findViewById(R.id.sign_in2);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FirebaseAuth.getInstance().signOut();
+                Intent intent = new Intent(getApplicationContext(), SignInActivity.class);
+                startActivity(intent);
+            }
+        });
 
         ref = FirebaseDatabase.getInstance().getReference();
 
@@ -159,13 +175,13 @@ public class MainActivity extends AppCompatActivity {
 
         for (final ChampBans bans: bans) {
 
-            StorageReference champsRef = FirebaseStorage.getInstance().getReference().child("bans" + "/" + bans.name);
-            UploadTask uploadTask = champsRef.putStream(getResources().openRawResource(bans.getImageId()));
+            StorageReference bansRef = FirebaseStorage.getInstance().getReference().child("bans" + "/" + bans.name + "general");
+            UploadTask uploadTask = bansRef.putStream(getResources().openRawResource(bans.getImageId()));
 
             uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    Uri downloadUrl = taskSnapshot.getDownloadUrl();
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot2) {
+                    Uri downloadUrl = taskSnapshot2.getDownloadUrl();
                     ChampBansFB champBansFB = new ChampBansFB(bans.id, downloadUrl.toString(), bans.name, bans.victorias, bans.banrate, bans.pickrate);
 
                     String champKey = ref.child("bans").push().getKey();
@@ -179,27 +195,26 @@ public class MainActivity extends AppCompatActivity {
     void uploadBuilds () {
     }
 
-    void uploadBansBronce () {
+   void uploadBansBronce () {
 
-        bans.clear();
-        bans.add(new ChampBans(12, R.raw.ic_brand,"Brand","55,34%","12,52%","11,82%"));
-        bans.add(new ChampBans(11, R.raw.ic_blitzcrank,"Blitzcrank","53,36%","32,60%","10,54%"));
-        bans.add(new ChampBans(38, R.raw.ic_illaoi,"Illaoi","54,47%","25,90%","08,79%"));
-        bans.add(new ChampBans(3, R.raw.ic_alistar,"Alistar","52,49%","08,57%","11,66%"));
+        bans2.add(new ChampBans(12, R.raw.ic_brand,"Brand","55,34%","12,52%","11,82%"));
+        bans2.add(new ChampBans(11, R.raw.ic_blitzcrank,"Blitzcrank","53,36%","32,60%","10,54%"));
+        bans2.add(new ChampBans(38, R.raw.ic_illaoi,"Illaoi","54,47%","25,90%","08,79%"));
+        bans2.add(new ChampBans(3, R.raw.ic_alistar,"Alistar","52,49%","08,57%","11,66%"));
 
-        for (final ChampBans bans : bans){
+        for (final ChampBans bans2 : bans2){
 
-            StorageReference champsRef = FirebaseStorage.getInstance().getReference().child("bans" + "/" + bans.name);
-            UploadTask uploadTask = champsRef.putStream(getResources().openRawResource(bans.getImageId()));
+            StorageReference champsRef = FirebaseStorage.getInstance().getReference().child("bans" + "/" + bans2.name + "bronce");
+            UploadTask uploadTask = champsRef.putStream(getResources().openRawResource(bans2.getImageId()));
 
             uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     Uri downloadUrl = taskSnapshot.getDownloadUrl();
-                    ChampBansFB champBansFB = new ChampBansFB(bans.id, downloadUrl.toString(), bans.name, bans.victorias, bans.banrate, bans.pickrate);
+                    ChampBansFB champBansFB2 = new ChampBansFB(bans2.id, downloadUrl.toString(), bans2.name, bans2.victorias, bans2.banrate, bans2.pickrate);
 
                     String champKey = ref.child("bans").push().getKey();
-                    ref.child("bans/bronce").child(champKey).setValue(champBansFB);
+                    ref.child("bans/bronce").child(champKey).setValue(champBansFB2);
                 }
             });
         }
