@@ -321,4 +321,9 @@ public class MainActivity extends AppCompatActivity {
             });
         }
     }
+
+    void uploadBuilds() {
+        build.clear();
+        build.add(new Build(R.raw.ic_aatrox,"50,28%","Top","2013",R.raw.ic_tabi_ninja,R.raw.ic_trinidad,R.raw.ic_sterak,R.raw.ic_hidra_titanica,R.raw.ic_rostro_espiritual,R.raw.ic_rey_arruinado,R.raw.ic_flash,R.raw.ic_teleport,0,0,R.raw.ic_espada_de_doran,R.raw.ic_pocion,R.raw.ic_aatrox_lvl,R.raw.ic_precision_round,R.raw.ic_domination,R.raw.ic_brujeria,R.raw.ic_valor,R.raw.ic_inspiracion,R.raw.ic_domination,R.raw.ic_brujeria,R.raw.ic_valor_round,R.raw.ic_inspiracion,R.raw.ic_garras_del_inmortal_round,R.raw.ic_inquebrantable,R.raw.ic_piel_de_hierro_round,R.raw.ic_sobrecrecimiento_round,R.raw.ic_reverberacion,R.raw.ic_demoler,R.raw.ic_concha_espejo,R.raw.ic_revitalizar,R.raw.ic_protector,R.raw.ic_fuente_de_vida_round,R.raw.ic_condicionamiento,R.raw.ic_fuentes_renovadas,R.raw.ic_super_curacion,R.raw.ic_leyenda_presteza_round,R.raw.ic_golpe_de_gracia,R.raw.ic_triumfo,R.raw.ic_leyenda_tenacidad,R.raw.ic_derribado,R.raw.ic_claridad_mental,R.raw.ic_leyenda_linaje,R.raw.ic_ultimo_esfuerzo_round));
+    }
 }
