@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     List<Champ> champs = new ArrayList<>(500);
     List<Bans> bans = new ArrayList<>(500);
     List<Build> build = new ArrayList<>(500);
+    List<Video> video = new ArrayList<>(500);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +57,12 @@ public class MainActivity extends AppCompatActivity {
         }catch (InterruptedException e) {
            e.printStackTrace();
         }
+        try {
+            uploadVideos();
+        }catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        uploadVideoActivity();
         uploadChamps();
         uploadBansGeneral();
         uploadBansBronce();
@@ -236,6 +243,16 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    void uploadVideoActivity() {
+        video.clear();
+        video.add(new Video(0,"Zed vs Zed (Faker)","fakerzed"));
+        video.add(new Video(1,"Backdoor (Xpeke)","backdoor"));
+
+        for (final Video video: video){
+            writeNewVideo(video);
+        }
+    }
+
     void uploadImages() throws InterruptedException {
         try {
             for(final String imageFileName: getAssets().list("img")) {
@@ -251,6 +268,30 @@ public class MainActivity extends AppCompatActivity {
                         System.out.println("IMAGESTRIP [" + imageStrip + "]");
                         imageUrls.put(imageStrip, downloadUrl.toString());
                         ref.child("images").child(imageStrip).setValue(downloadUrl.toString());
+                    }
+                });
+
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    void uploadVideos() throws InterruptedException {
+        try {
+            for(final String videoFileName: getAssets().list("videos")) {
+                StorageReference champsRef = FirebaseStorage.getInstance().getReference().child(UUID.randomUUID().toString());
+                UploadTask uploadTask = champsRef.putStream(getAssets().open("videos/" + videoFileName));
+                Thread.sleep(300);
+                uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        Uri downloadUrl = taskSnapshot.getDownloadUrl();
+                        System.out.println(downloadUrl.toString());
+                        String videoStrip = videoFileName.replace(".mp4","");
+                        System.out.println("VIDEOSTRIP [" + videoStrip + "]");
+                        imageUrls.put(videoStrip, downloadUrl.toString());
+                        ref.child("videos").child(videoStrip).setValue(downloadUrl.toString());
                     }
                 });
 
@@ -304,6 +345,25 @@ public class MainActivity extends AppCompatActivity {
                 Bans BansFB = new Bans(ban.id, imageUrl, ban.name, ban.victorias, ban.banrate, ban.pickrate);
                 String champKey = ref.child("bans").push().getKey();
                 ref.child("bans").child(refbans).child(champKey).setValue(BansFB);
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    void writeNewVideo(final Video video){
+        ref.child("videos").child(video.videoName).addListenerForSingleValueEvent(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String videoUrl = dataSnapshot.getValue(String.class);
+                Video videoFB = new Video(video.id,video.titulo,videoUrl);
+                String champKey = ref.child("videos").push().getKey();
+                ref.child("videos").child(champKey).setValue(videoFB);
 
             }
 
