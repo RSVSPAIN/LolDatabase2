@@ -3,15 +3,16 @@ package com.example.dam2a.loldatabase2;
 public class Champ {
     Integer id;
     String posicion;
-    int imageId;
+    String imageName;
     String name;
 
-    public Champ(Integer id, String posicion, int imageId, String name) {
+    public Champ(Integer id, String posicion, String imageName, String name) {
         this.id = id;
         this.posicion = posicion;
-        this.imageId = imageId;
+        this.imageName = imageName;
         this.name = name;
     }
+
 
     public Integer getId() {
         return id;
@@ -29,12 +30,12 @@ public class Champ {
         this.posicion = posicion;
     }
 
-    public int getImageId() {
-        return imageId;
+    public String getImageName() {
+        return imageName;
     }
 
-    public void setImageId(int imageId) {
-        this.imageId = imageId;
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
     }
 
     public String getName() {
