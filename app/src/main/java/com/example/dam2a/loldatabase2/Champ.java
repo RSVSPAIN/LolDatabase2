@@ -13,6 +13,7 @@ public class Champ {
         this.name = name;
     }
 
+    public Champ() {}
 
     public Integer getId() {
         return id;

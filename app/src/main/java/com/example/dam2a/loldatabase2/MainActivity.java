@@ -12,7 +12,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.Exclude;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.IgnoreExtraProperties;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -20,6 +22,7 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,10 +32,14 @@ public class MainActivity extends AppCompatActivity {
     DatabaseReference ref;
 
     Map<String, String> imageUrls = new HashMap<>();
+    Map<String, String> champKeys = new HashMap<>();  // aatrox => -7Gheiuiewgew
     List<Champ> champs = new ArrayList<>(500);
     List<Bans> bans = new ArrayList<>(500);
     List<Build> build = new ArrayList<>(500);
     List<Video> video = new ArrayList<>(500);
+
+    boolean champsLoaded = false;
+    boolean imagesLoaded = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,25 +59,33 @@ public class MainActivity extends AppCompatActivity {
 
         ref = FirebaseDatabase.getInstance().getReference();
 
-        try {
-            uploadImages();
-        }catch (InterruptedException e) {
-           e.printStackTrace();
+        queryImages();
+        queryChamps();
+//        try {
+//            uploadImages();
+//        }catch (InterruptedException e) {
+//           e.printStackTrace();
+//        }
+//        try {
+//            uploadVideos();
+//        }catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+//        uploadVideoActivity();
+//        uploadChamps();
+//        uploadBansGeneral();
+//        uploadBansBronce();
+//        uploadBansPlata();
+//        uploadBansOro();
+//        uploadBansPlatino();
+//        uploadBansDiamante();
+
+    }
+
+    void finishedLoading(){
+        if(imagesLoaded && champsLoaded){
+            uploadBuilds();
         }
-        try {
-            uploadVideos();
-        }catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        uploadVideoActivity();
-        uploadChamps();
-        uploadBansGeneral();
-        uploadBansBronce();
-        uploadBansPlata();
-        uploadBansOro();
-        uploadBansPlatino();
-        uploadBansDiamante();
-        uploadBuilds();
     }
 
     void uploadChamps(){
@@ -233,13 +248,10 @@ public class MainActivity extends AppCompatActivity {
 
     void uploadBuilds() {
         build.clear();
-        build.add(new Build("ic_aatrox","50,28%","Top","2013","ic_tabi_ninja", "ic_trinidad", "ic_sterak", "ic_hidra_titanica", "ic_rostro_espiritual", "ic_rey_arruinado", "ic_flash", "ic_teleport", "","", "ic_espada_de_doran", "ic_pocion","ic_aatrox_lvl", "ic_precision_round", "ic_domination", "ic_brujeria", "ic_valor", "ic_inspiracion", "ic_domination", "ic_brujeria", "ic_valor_round", "ic_inspiracion", "ic_garras_del_inmortal_round", "ic_inquebrantable", "ic_piel_de_hierro_round", "ic_sobrecrecimiento_round", "ic_reverberacion", "ic_demoler", "ic_concha_espejo", "ic_revitalizar", "ic_protector", "ic_fuente_de_vida_round", "ic_condicionamiento", "ic_fuentes_renovadas", "ic_super_curacion", "ic_leyenda_presteza_round", "ic_golpe_de_gracia", "ic_triumfo", "ic_leyenda_tenacidad", "ic_derribado", "ic_claridad_mental", "ic_leyenda_linaje", "ic_ultimo_esfuerzo_round"));
+        build.add(new Build("Aatrox", "50,28%","Top","2013","ic_aatrox", "ic_tabi_ninja", "ic_trinidad", "ic_sterak", "ic_hidra_titanica", "ic_rostro_espiritual", "ic_rey_arruinado", "ic_flash", "ic_teleport", "","", "ic_espada_de_doran", "ic_pocion","ic_aatrox_lvl", "ic_precision_round", "ic_domination", "ic_brujeria", "ic_valor", "ic_inspiracion", "ic_domination", "ic_brujeria", "ic_valor_round", "ic_inspiracion", "ic_garras_del_inmortal_round", "ic_inquebrantable", "ic_piel_de_hierro_round", "ic_sobrecrecimiento_round", "ic_reverberacion", "ic_demoler", "ic_concha_espejo", "ic_revitalizar", "ic_protector", "ic_fuente_de_vida_round", "ic_condicionamiento", "ic_fuentes_renovadas", "ic_super_curacion", "ic_leyenda_presteza_round", "ic_golpe_de_gracia", "ic_triumfo", "ic_leyenda_tenacidad", "ic_derribado", "ic_claridad_mental", "ic_leyenda_linaje", "ic_ultimo_esfuerzo_round"));
 
         for (final Build build : build){
-            Build build2 = new Build(imageUrls.get(build.image1),build.porciento,build.papel,build.año,imageUrls.get(build.image2),imageUrls.get(build.image3),imageUrls.get(build.image4),imageUrls.get(build.image5),imageUrls.get(build.image6),imageUrls.get(build.image7),imageUrls.get(build.image8),imageUrls.get(build.image9),imageUrls.get(build.image10),imageUrls.get(build.image11),imageUrls.get(build.image12),imageUrls.get(build.image13),imageUrls.get(build.image14),imageUrls.get(build.image15),imageUrls.get(build.image16),imageUrls.get(build.image17),imageUrls.get(build.image18),imageUrls.get(build.image19),imageUrls.get(build.image20),imageUrls.get(build.image21),imageUrls.get(build.image22),imageUrls.get(build.image23),imageUrls.get(build.image24),imageUrls.get(build.image25),imageUrls.get(build.image26),imageUrls.get(build.image27),imageUrls.get(build.image28),imageUrls.get(build.image29),imageUrls.get(build.image30),imageUrls.get(build.image31),imageUrls.get(build.image32),imageUrls.get(build.image33),imageUrls.get(build.image34),imageUrls.get(build.image35),imageUrls.get(build.image36),imageUrls.get(build.image37),imageUrls.get(build.image38),imageUrls.get(build.image39),imageUrls.get(build.image40),imageUrls.get(build.image41),imageUrls.get(build.image42),imageUrls.get(build.image43),imageUrls.get(build.image44));
-
-            String champKey = ref.child("build").push().getKey();
-            ref.child("build/aatrox").child(champKey).setValue(build2);
+            writeNewBuild(build);
         }
     }
 
@@ -277,6 +289,27 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    void queryImages(){
+        ref.child("images").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot dataSnapshot1: dataSnapshot.getChildren()){
+                    String imageUrl = dataSnapshot1.getValue(String.class);
+                    String key = dataSnapshot1.getKey();
+                    imageUrls.put(key, imageUrl);
+                }
+
+                imagesLoaded = true;
+                finishedLoading();
+           }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
     void uploadVideos() throws InterruptedException {
         try {
             for(final String videoFileName: getAssets().list("videos")) {
@@ -301,32 +334,18 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    void writeNewChamp(final Champ champ){
-        ref.child("images").child(champ.imageName).addListenerForSingleValueEvent(new ValueEventListener() {
-
+    void queryChamps(){
+        ref.child("champs/all-champs").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                String imageUrl = dataSnapshot.getValue(String.class);
-                Champ champFB = new Champ(champ.id, champ.posicion, imageUrl, champ.name);
-                String champKey = ref.child("champs").push().getKey();
-                ref.child("champs").child("all-champs").child(champKey).setValue(champFB);
-
-                if ("Top".equals(champ.getPosicion())) {
-                    ref.child("champs/top-champs").child(champKey).setValue(champ.getName().toLowerCase());
-                }
-                if ("Jungla".equals(champ.getPosicion())) {
-                    ref.child("champs/jungla-champs").child(champKey).setValue(champ.getName().toLowerCase());
-                }
-                if ("Mid".equals(champ.getPosicion())) {
-                    ref.child("champs/mid-champs").child(champKey).setValue(champ.getName().toLowerCase());
-                }
-                if ("Adc".equals(champ.getPosicion())) {
-                    ref.child("champs/adc-champs").child(champKey).setValue(champ.getName().toLowerCase());
-                }
-                if ("Support".equals(champ.getPosicion())) {
-                    ref.child("champs/support-champs").child(champKey).setValue(champ.getName().toLowerCase());
+                for(DataSnapshot dataSnapshot1: dataSnapshot.getChildren()){
+                    Champ champ = dataSnapshot1.getValue(Champ.class);
+                    String key = dataSnapshot1.getKey();
+                    champKeys.put(champ.name, key);
                 }
 
+                champsLoaded = true;
+                finishedLoading();
             }
 
             @Override
@@ -334,6 +353,31 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    void writeNewChamp(final Champ champ){
+
+        Champ champFB = new Champ(champ.id, champ.posicion, imageUrls.get(champ.imageName), champ.name);
+        String champKey = ref.child("champs").push().getKey();
+        champKeys.put(champ.name,champKey);
+
+        ref.child("champs").child("all-champs").child(champKey).setValue(champFB);
+
+        if ("Top".equals(champ.getPosicion())) {
+            ref.child("champs/top-champs").child(champKey).setValue(champ.getName().toLowerCase());
+        }
+        if ("Jungla".equals(champ.getPosicion())) {
+            ref.child("champs/jungla-champs").child(champKey).setValue(champ.getName().toLowerCase());
+        }
+        if ("Mid".equals(champ.getPosicion())) {
+            ref.child("champs/mid-champs").child(champKey).setValue(champ.getName().toLowerCase());
+        }
+        if ("Adc".equals(champ.getPosicion())) {
+            ref.child("champs/adc-champs").child(champKey).setValue(champ.getName().toLowerCase());
+        }
+        if ("Support".equals(champ.getPosicion())) {
+            ref.child("champs/support-champs").child(champKey).setValue(champ.getName().toLowerCase());
+        }
     }
 
     void writeNewBan(final Bans ban, final String refbans){
@@ -353,6 +397,22 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    void writeNewBuild(Build build){
+
+        Map<String, String> UrlImagenes = new HashMap<>();
+
+        for (String key: build.imagenes.keySet()){
+            System.out.println("IMAGEURL " + key +  " ==>> " + build.imagenes.get(key));
+
+            UrlImagenes.put(key, imageUrls.get(build.imagenes.get(key)));
+        }
+
+        build.imagenes = UrlImagenes;
+
+        ref.child("build").child(champKeys.get(build.name)).setValue(build);
+
     }
 
     void writeNewVideo(final Video video){
