@@ -391,12 +391,10 @@ public class MainActivity extends AppCompatActivity {
 
         for (String key: build.imagenes.keySet()){
             System.out.println("IMAGEURL " + key +  " ==>> " + build.imagenes.get(key));
-
             UrlImagenes.put(key, imageUrls.get(build.imagenes.get(key)));
         }
 
         build.imagenes = UrlImagenes;
-
         ref.child("build").child(champKeys.get(build.name)).setValue(build);
 
     }
