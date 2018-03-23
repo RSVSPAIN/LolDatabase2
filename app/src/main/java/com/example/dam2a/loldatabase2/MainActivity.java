@@ -36,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
     List<Champ> champs = new ArrayList<>(500);
     List<Bans> bans = new ArrayList<>(500);
     List<Build> build = new ArrayList<>(500);
-    List<Video> video = new ArrayList<>(500);
 
     boolean champsLoaded = false;
     boolean imagesLoaded = false;
@@ -65,11 +64,6 @@ public class MainActivity extends AppCompatActivity {
 //            uploadImages();
 //        }catch (InterruptedException e) {
 //           e.printStackTrace();
-//        }
-//        try {
-//            uploadVideos();
-//        }catch (InterruptedException e) {
-//            e.printStackTrace();
 //        }
 //        uploadVideoActivity();
 //        uploadChamps();
@@ -257,16 +251,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    void uploadVideoActivity() {
-        video.clear();
-        video.add(new Video(0,"Zed vs Zed (Faker)","fakerzed"));
-        video.add(new Video(1,"Backdoor (Xpeke)","backdoor"));
-
-        for (final Video video: video){
-            writeNewVideo(video);
-        }
-    }
-
     void uploadImages() throws InterruptedException {
         try {
             for(final String imageFileName: getAssets().list("img")) {
@@ -415,24 +399,5 @@ public class MainActivity extends AppCompatActivity {
 
         ref.child("build").child(champKeys.get(build.name)).setValue(build);
 
-    }
-
-    void writeNewVideo(final Video video){
-        ref.child("videos").child(video.videoName).addListenerForSingleValueEvent(new ValueEventListener() {
-
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                String videoUrl = dataSnapshot.getValue(String.class);
-                Video videoFB = new Video(video.id,video.titulo,videoUrl);
-                String champKey = ref.child("videos").push().getKey();
-                ref.child("videos").child(champKey).setValue(videoFB);
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
     }
 }
