@@ -12,9 +12,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.Exclude;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.IgnoreExtraProperties;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -22,7 +20,6 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -58,14 +55,13 @@ public class MainActivity extends AppCompatActivity {
 
         ref = FirebaseDatabase.getInstance().getReference();
 
-        queryImages();
-        queryChamps();
 //        try {
 //            uploadImages();
 //        }catch (InterruptedException e) {
 //           e.printStackTrace();
 //        }
-//        uploadVideoActivity();
+        queryImages();
+        queryChamps();
 //        uploadChamps();
 //        uploadBansGeneral();
 //        uploadBansBronce();
@@ -243,7 +239,7 @@ public class MainActivity extends AppCompatActivity {
     void uploadBuilds() {
         build.clear();
         build.add(new Build("Aatrox", "50,28%","Top","2013","ic_aatrox", "ic_tabi_ninja", "ic_trinidad", "ic_sterak", "ic_hidra_titanica", "ic_rostro_espiritual", "ic_rey_arruinado", "ic_flash", "ic_teleport", "","", "ic_espada_de_doran", "ic_pocion","ic_aatrox_lvl", "ic_precision_round", "ic_domination", "ic_brujeria", "ic_valor", "ic_inspiracion", "ic_domination", "ic_brujeria", "ic_valor_round", "ic_inspiracion", "ic_garras_del_inmortal_round", "ic_inquebrantable", "ic_piel_de_hierro_round", "ic_sobrecrecimiento_round", "ic_reverberacion", "ic_demoler", "ic_concha_espejo", "ic_revitalizar", "ic_protector", "ic_fuente_de_vida_round", "ic_condicionamiento", "ic_fuentes_renovadas", "ic_super_curacion", "ic_leyenda_presteza_round", "ic_golpe_de_gracia", "ic_triumfo", "ic_leyenda_tenacidad", "ic_derribado", "ic_claridad_mental", "ic_leyenda_linaje", "ic_ultimo_esfuerzo_round"));
-        build.add(new Build("Ahri", "50,28%","Top","2013","ic_ahri", "ic_tabi_ninja", "ic_trinidad", "ic_sterak", "ic_hidra_titanica", "ic_rostro_espiritual", "ic_rey_arruinado", "ic_flash", "ic_teleport", "","", "ic_espada_de_doran", "ic_pocion","ic_aatrox_lvl", "ic_precision_round", "ic_domination", "ic_brujeria", "ic_valor", "ic_inspiracion", "ic_domination", "ic_brujeria", "ic_valor_round", "ic_inspiracion", "ic_garras_del_inmortal_round", "ic_inquebrantable", "ic_piel_de_hierro_round", "ic_sobrecrecimiento_round", "ic_reverberacion", "ic_demoler", "ic_concha_espejo", "ic_revitalizar", "ic_protector", "ic_fuente_de_vida_round", "ic_condicionamiento", "ic_fuentes_renovadas", "ic_super_curacion", "ic_leyenda_presteza_round", "ic_golpe_de_gracia", "ic_triumfo", "ic_leyenda_tenacidad", "ic_derribado", "ic_claridad_mental", "ic_leyenda_linaje", "ic_ultimo_esfuerzo_round"));
+        build.add(new Build("Ahri", "52,29%","Mid","2011","ic_ahri", "ic_sable_pistola", "ic_botas_hechizero", "ic_morellonomicon", "ic_baston_del_vacio", "ic_eco_de_luden", "ic_rabadon", "ic_flash", "ic_ignite", "","ic_anillo_de_doran", "ic_pocion", "ic_pocion","ic_ahri_lvl", "ic_precision", "ic_domination_round", "ic_brujeria", "ic_valor", "ic_inspiracion", "ic_precision", "ic_brujeria_round", "ic_valor", "ic_inspiracion", "ic_electrocutar_round", "ic_golpe_bajo", "ic_guardian_zombi_round", "ic_cazador_voraz_round", "ic_depredador", "ic_sabor_a_sangre", "ic_poro_fantasmal", "ic_cazador_ingenioso", "ic_cosecha_oscura", "ic_impacto_repentino_round", "ic_coleccion_de_globos_oculares", "ic_cazador_incesante", "ic_orbe_anulador", "ic_trascendencia", "ic_pirolaser", "ic_banda_de_mana", "ic_celeridad_round", "ic_caminar_sobre_agua", "ic_sombrero_definitivo_round", "ic_concentracion_absoluta", "ic_se_avecina_tormenta"));
 
 
         for (final Build build : build){
@@ -342,28 +338,40 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void writeNewChamp(final Champ champ){
+        ref.child("images").child(champ.imageName).addListenerForSingleValueEvent(new ValueEventListener() {
 
-        Champ champFB = new Champ(champ.id, champ.posicion, imageUrls.get(champ.imageName), champ.name);
-        String champKey = ref.child("champs").push().getKey();
-        champKeys.put(champ.name,champKey);
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String imageUrl = dataSnapshot.getValue(String.class);
+                Champ champFB = new Champ(champ.id, champ.posicion, imageUrl, champ.name);
+                String champKey = ref.child("champs").push().getKey();
+                champKeys.put(champ.name,champKey);
 
-        ref.child("champs").child("all-champs").child(champKey).setValue(champFB);
+                ref.child("champs/all-champs").child(champKey).setValue(champFB);
 
-        if ("Top".equals(champ.getPosicion())) {
-            ref.child("champs/top-champs").child(champKey).setValue(champ.getName().toLowerCase());
-        }
-        if ("Jungla".equals(champ.getPosicion())) {
-            ref.child("champs/jungla-champs").child(champKey).setValue(champ.getName().toLowerCase());
-        }
-        if ("Mid".equals(champ.getPosicion())) {
-            ref.child("champs/mid-champs").child(champKey).setValue(champ.getName().toLowerCase());
-        }
-        if ("Adc".equals(champ.getPosicion())) {
-            ref.child("champs/adc-champs").child(champKey).setValue(champ.getName().toLowerCase());
-        }
-        if ("Support".equals(champ.getPosicion())) {
-            ref.child("champs/support-champs").child(champKey).setValue(champ.getName().toLowerCase());
-        }
+                if ("Top".equals(champ.getPosicion())) {
+                    ref.child("champs/top-champs").child(champKey).setValue(champ.getName().toLowerCase());
+                }
+                if ("Jungla".equals(champ.getPosicion())) {
+                    ref.child("champs/jungla-champs").child(champKey).setValue(champ.getName().toLowerCase());
+                }
+                if ("Mid".equals(champ.getPosicion())) {
+                    ref.child("champs/mid-champs").child(champKey).setValue(champ.getName().toLowerCase());
+                }
+                if ("Adc".equals(champ.getPosicion())) {
+                    ref.child("champs/adc-champs").child(champKey).setValue(champ.getName().toLowerCase());
+                }
+                if ("Support".equals(champ.getPosicion())) {
+                    ref.child("champs/support-champs").child(champKey).setValue(champ.getName().toLowerCase());
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
     void writeNewBan(final Bans ban, final String refbans){
