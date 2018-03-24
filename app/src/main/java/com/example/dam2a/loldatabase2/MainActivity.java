@@ -60,15 +60,16 @@ public class MainActivity extends AppCompatActivity {
 //        }catch (InterruptedException e) {
 //           e.printStackTrace();
 //        }
+
+        uploadChamps();
+        uploadBansGeneral();
+        uploadBansBronce();
+        uploadBansPlata();
+        uploadBansOro();
+        uploadBansPlatino();
+        uploadBansDiamante();
         queryImages();
         queryChamps();
-//        uploadChamps();
-//        uploadBansGeneral();
-//        uploadBansBronce();
-//        uploadBansPlata();
-//        uploadBansOro();
-//        uploadBansPlatino();
-//        uploadBansDiamante();
 
     }
 
@@ -347,8 +348,8 @@ public class MainActivity extends AppCompatActivity {
                 String champKey = ref.child("champs").push().getKey();
                 champKeys.put(champ.name,champKey);
 
-                ref.child("champs/all-champs").child(champKey).setValue(champFB);
-
+                ref.child("champs/data").child(champKey).setValue(champFB);
+                ref.child("champs/all-champs").child(champKey).setValue(champFB.getName().toLowerCase());
                 if ("Top".equals(champ.getPosicion())) {
                     ref.child("champs/top-champs").child(champKey).setValue(champ.getName().toLowerCase());
                 }
