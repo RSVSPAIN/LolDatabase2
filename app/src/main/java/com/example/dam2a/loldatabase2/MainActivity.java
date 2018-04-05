@@ -61,13 +61,13 @@ public class MainActivity extends AppCompatActivity {
 //           e.printStackTrace();
 //        }
 
-        uploadChamps();
-        uploadBansGeneral();
-        uploadBansBronce();
-        uploadBansPlata();
-        uploadBansOro();
-        uploadBansPlatino();
-        uploadBansDiamante();
+//        uploadChamps();
+//        uploadBansGeneral();
+//        uploadBansBronce();
+//        uploadBansPlata();
+//        uploadBansOro();
+//        uploadBansPlatino();
+//        uploadBansDiamante();
         queryImages();
         queryChamps();
 
@@ -75,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
 
     void finishedLoading(){
         if(imagesLoaded && champsLoaded){
+            System.out.println("HOLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
             uploadBuilds();
         }
     }
@@ -241,7 +242,44 @@ public class MainActivity extends AppCompatActivity {
         build.clear();
         build.add(new Build("Aatrox", "50,28%","Top","2013","ic_aatrox", "ic_tabi_ninja", "ic_trinidad", "ic_sterak", "ic_hidra_titanica", "ic_rostro_espiritual", "ic_rey_arruinado", "ic_flash", "ic_teleport", "","", "ic_espada_de_doran", "ic_pocion","ic_aatrox_lvl", "ic_precision_round", "ic_domination", "ic_brujeria", "ic_valor", "ic_inspiracion", "ic_domination", "ic_brujeria", "ic_valor_round", "ic_inspiracion", "ic_garras_del_inmortal_round", "ic_inquebrantable", "ic_piel_de_hierro_round", "ic_sobrecrecimiento_round", "ic_reverberacion", "ic_demoler", "ic_concha_espejo", "ic_revitalizar", "ic_protector", "ic_fuente_de_vida_round", "ic_condicionamiento", "ic_fuentes_renovadas", "ic_super_curacion", "ic_leyenda_presteza_round", "ic_golpe_de_gracia", "ic_triumfo", "ic_leyenda_tenacidad", "ic_derribado", "ic_claridad_mental", "ic_leyenda_linaje", "ic_ultimo_esfuerzo_round"));
         build.add(new Build("Ahri", "52,29%","Mid","2011","ic_ahri", "ic_sable_pistola", "ic_botas_hechizero", "ic_morellonomicon", "ic_baston_del_vacio", "ic_eco_de_luden", "ic_rabadon", "ic_flash", "ic_ignite", "","ic_anillo_de_doran", "ic_pocion", "ic_pocion","ic_ahri_lvl", "ic_precision", "ic_domination_round", "ic_brujeria", "ic_valor", "ic_inspiracion", "ic_precision", "ic_brujeria_round", "ic_valor", "ic_inspiracion", "ic_electrocutar_round", "ic_golpe_bajo", "ic_guardian_zombi_round", "ic_cazador_voraz_round", "ic_depredador", "ic_sabor_a_sangre", "ic_poro_fantasmal", "ic_cazador_ingenioso", "ic_cosecha_oscura", "ic_impacto_repentino_round", "ic_coleccion_de_globos_oculares", "ic_cazador_incesante", "ic_orbe_anulador", "ic_trascendencia", "ic_pirolaser", "ic_banda_de_mana", "ic_celeridad_round", "ic_caminar_sobre_agua", "ic_sombrero_definitivo_round", "ic_concentracion_absoluta", "ic_se_avecina_tormenta"));
-
+        build.add(new Build("Akali","49,94%","Mid","2010","ic_akali","ic_sable_pistola","ic_botas_hechizero","ic_reloj_zhonya","ic_perdicion_del_liche","ic_baston_del_vacio","ic_rabadon","ic_flash","ic_teleport","","","ic_sello_oscuro","ic_pocion_reutilizable","ic_akali_lvl","ic_precision","ic_domination_round","ic_brujeria","ic_valor","ic_inspiracion","ic_precision","ic_brujeria","ic_valor","ic_inspiracion_round","ic_electrocutar_round","ic_golpe_bajo","ic_guardian_zombi_round","ic_cazador_voraz_round","ic_depredador","ic_sabor_a_sangre","ic_poro_fantasmal","ic_cazador_ingenioso","ic_cosecha_oscura","ic_impacto_repentino_round","ic_coleccion_de_globos_oculares","ic_cazador_incesante","ic_destello_hextech","ic_mercado_del_futuro","ic_perspicacia_cosmica_round","ic_botas_gratis","ic_desmaterializador","ic_velocidad_de_acercamiento","ic_cronometro_round","ic_entrega_de_galletas","ic_cuerpo_celeste"));
+//        build.add(new Build("","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""));
+//        build.add(new Build("","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""));
+//        build.add(new Build("","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""));
+//        build.add(new Build("","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""));
+//        build.add(new Build("","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""));
+//        build.add(new Build("","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""));
+//        build.add(new Build("","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""));
+//        build.add(new Build("","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""));
+//        build.add(new Build("","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""));
+//        build.add(new Build("","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""));
+//        build.add(new Build("","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""));
+//        build.add(new Build("","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""));
+//        build.add(new Build("","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""));
+//        build.add(new Build("","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""));
+//        build.add(new Build("","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""));
+//        build.add(new Build("","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""));
+//        build.add(new Build("","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""));
+//        build.add(new Build("","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""));
+//        build.add(new Build("","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""));
+//        build.add(new Build("","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""));
+//        build.add(new Build("","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""));
+//        build.add(new Build("","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""));
+//        build.add(new Build("","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""));
+//        build.add(new Build("","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""));
+//        build.add(new Build("","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""));
+//        build.add(new Build("","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""));
+//        build.add(new Build("","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""));
+//        build.add(new Build("","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""));
+//        build.add(new Build("","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""));
+//        build.add(new Build("","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""));
+//        build.add(new Build("","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""));
+//        build.add(new Build("","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""));
+//        build.add(new Build("","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""));
+//        build.add(new Build("","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""));
+//        build.add(new Build("","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""));
+//        build.add(new Build("","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""));
+//        build.add(new Build("","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""));
 
         for (final Build build : build){
             writeNewBuild(build);
@@ -293,32 +331,8 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    void uploadVideos() throws InterruptedException {
-        try {
-            for(final String videoFileName: getAssets().list("videos")) {
-                StorageReference champsRef = FirebaseStorage.getInstance().getReference().child(UUID.randomUUID().toString());
-                UploadTask uploadTask = champsRef.putStream(getAssets().open("videos/" + videoFileName));
-                Thread.sleep(300);
-                uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        Uri downloadUrl = taskSnapshot.getDownloadUrl();
-                        System.out.println(downloadUrl.toString());
-                        String videoStrip = videoFileName.replace(".mp4","");
-                        System.out.println("VIDEOSTRIP [" + videoStrip + "]");
-                        imageUrls.put(videoStrip, downloadUrl.toString());
-                        ref.child("videos").child(videoStrip).setValue(downloadUrl.toString());
-                    }
-                });
-
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     void queryChamps(){
-        ref.child("champs/all-champs").addListenerForSingleValueEvent(new ValueEventListener() {
+        ref.child("champs/data").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for(DataSnapshot dataSnapshot1: dataSnapshot.getChildren()){
