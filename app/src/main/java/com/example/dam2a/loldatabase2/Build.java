@@ -27,4 +27,36 @@ public class Build {
             this.imagenes.put(String.valueOf(i), imagenes[i]);
         }
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPorciento() {
+        return porciento;
+    }
+
+    public void setPorciento(String porciento) {
+        this.porciento = porciento;
+    }
+
+    public String getPapel() {
+        return papel;
+    }
+
+    public void setPapel(String papel) {
+        this.papel = papel;
+    }
+
+    public String getAño() {
+        return año;
+    }
+
+    public void setAño(String año) {
+        this.año = año;
+    }
 }
